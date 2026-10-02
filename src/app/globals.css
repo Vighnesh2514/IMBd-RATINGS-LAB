@@ -1,26 +1,108 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme {
+  --color-imdb: #f5c518;
+  --color-imdb-soft: #ffe066;
+  --color-imdb-deep: #b8900a;
+  --color-ink: #08080a;
+  --color-surface: #101014;
+  --color-surface-2: #16161d;
+  --color-surface-3: #1d1d26;
+  --color-line: #2a2a35;
+  --color-muted: #9aa0ab;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-ink);
+    color: #ececf1;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-imdb);
+    color: #000;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0d0d11;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2c2c38;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-imdb-deep);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(100deg, #ffffff 0%, #f5c518 55%, #b8900a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glass {
+    background: rgba(22, 22, 29, 0.6);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .card {
+    background: linear-gradient(180deg, rgba(29, 29, 38, 0.75), rgba(16, 16, 20, 0.75));
+    border: 1px solid var(--color-line);
+    border-radius: 1rem;
+  }
+  .card-hover {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    border-color: rgba(245, 197, 24, 0.5);
+    box-shadow: 0 18px 45px -20px rgba(245, 197, 24, 0.35);
+  }
+  .glow-imdb {
+    box-shadow: 0 0 60px -15px rgba(245, 197, 24, 0.55);
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 46px 46px;
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -18px, 0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.75; }
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 6s ease-in-out infinite; }
+.animate-marquee { animation: marquee 32s linear infinite; }
+
+.recharts-cartesian-axis-tick text {
+  fill: #9aa0ab;
+  font-size: 11px;
+}
+.recharts-legend-item-text {
+  color: #c8ccd4 !important;
+}
+.recharts-default-tooltip {
+  border-radius: 10px;
 }

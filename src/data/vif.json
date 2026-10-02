@@ -1,0 +1,1 @@
+[{"feature":"meta_score","VIF":1.11},{"feature":"log_votes","VIF":1.471},{"feature":"runtime_min","VIF":1.045},{"feature":"year","VIF":1.2},{"feature":"num_genres","VIF":1.033},{"feature":"gross_millions","VIF":1.461}]
